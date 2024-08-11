@@ -7,7 +7,6 @@ import 'package:solulab5/blocs/product_bloc/product_bloc.dart';
 import 'package:solulab5/blocs/product_bloc/product_event.dart';
 import 'package:solulab5/blocs/product_bloc/product_state.dart';
 import 'package:solulab5/models/product.dart';
-import 'package:solulab5/repositories/product_repository.dart';
 import 'package:solulab5/screens/banner_section.dart';
 import 'package:solulab5/screens/nav_screen/all_products.dart';
 import 'package:solulab5/screens/nav_screen/cart_screen.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:solulab5/blocs/navigation_bloc/navigation_bloc.dart';
 import 'package:solulab5/blocs/product_bloc/product_bloc.dart';
 import 'package:solulab5/blocs/product_bloc/product_event.dart';
 import 'package:solulab5/blocs/product_bloc/product_state.dart';
@@ -57,11 +56,11 @@ class ProductDetailsScreen extends StatelessWidget {
                                               product: currentProduct),
                                         );
 
-                                    if (currentProduct.isFavorite) {
-                                      context
-                                          .read<NavigationBloc>()
-                                          .add(NavigationEvent.favorite);
-                                    }
+                                    // if (currentProduct.isFavorite) {
+                                    //   context
+                                    //       .read<NavigationBloc>()
+                                    //       .add(NavigationEvent.favorite);
+                                    // }
                                   },
                                   icon: Icon(
                                     currentProduct.isFavorite

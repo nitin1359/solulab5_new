@@ -23,87 +23,83 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductBloc(productRepository: ProductRepository())
-        ..add(LoadProducts()),
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF9F9F9),
-        body: SafeArea(
-          child: BlocBuilder<NavigationBloc, NavigationState>(
-            builder: (context, state) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                _pageController.jumpToPage(_getCurrentIndex(state));
-              });
-
-              return PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  context
-                      .read<NavigationBloc>()
-                      .add(NavigationEvent.values[index]);
-                },
-                children: const [
-                  HomeScreenContent(),
-                  FavoriteScreen(),
-                  CartScreen(),
-                  ProfileScreen(),
-                ],
-              );
-            },
-          ),
-        ),
-        floatingActionButton: BlocBuilder<NavigationBloc, NavigationState>(
+    return Scaffold(
+      backgroundColor: const Color(0xFFF9F9F9),
+      body: SafeArea(
+        child: BlocBuilder<NavigationBloc, NavigationState>(
           builder: (context, state) {
-            if (state is NavigationCart || state is NavigationProfile) {
-              return const SizedBox.shrink(); 
-            } else {
-              return Visibility(
-                visible: MediaQuery.of(context).viewInsets.bottom == 0,
-                child: FloatingActionButton(
-                  onPressed: () {},
-                  backgroundColor: const Color(0xFF0C8A7B),
-                  shape: const CircleBorder(),
-                  child: SvgPicture.asset(
-                    'assets/images/svg/eye_scanner.svg',
-                    height: 24,
-                    width: 24,
-                  ),
-                ),
-              );
-            }
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _pageController.jumpToPage(_getCurrentIndex(state));
+            });
+    
+            return PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                context
+                    .read<NavigationBloc>()
+                    .add(NavigationEvent.values[index]);
+              },
+              children: const [
+                HomeScreenContent(),
+                FavoriteScreen(),
+                CartScreen(),
+                ProfileScreen(),
+              ],
+            );
           },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BlocBuilder<NavigationBloc, NavigationState>(
-          builder: (context, state) {
-            if (state is NavigationCart || state is NavigationProfile) {
-              return const SizedBox.shrink();
-            } else {
-              return BottomAppBar(
-                color: const Color(0xFFF9F9F9),
-                shape: const CircularNotchedRectangle(),
-                notchMargin: 8.0,
-                child: SizedBox(
-                  height: 60,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      _buildNavItem('assets/images/svg/bottom_nav_home.svg',
-                          'Home', 0, state, context),
-                      _buildNavItem('assets/images/svg/bottom_nav_favourite.svg',
-                          'Favourite', 1, state, context),
-                      const SizedBox(width: 40), 
-                      _buildNavItem('assets/images/svg/bottom_nav_cart.svg',
-                          'Shopping', 2, state, context),
-                      _buildNavItem('assets/images/svg/bottom_nav_profile.svg',
-                          'Profile', 3, state, context),
-                    ],
-                  ),
+      ),
+      floatingActionButton: BlocBuilder<NavigationBloc, NavigationState>(
+        builder: (context, state) {
+          if (state is NavigationCart || state is NavigationProfile) {
+            return const SizedBox.shrink(); 
+          } else {
+            return Visibility(
+              visible: MediaQuery.of(context).viewInsets.bottom == 0,
+              child: FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: const Color(0xFF0C8A7B),
+                shape: const CircleBorder(),
+                child: SvgPicture.asset(
+                  'assets/images/svg/eye_scanner.svg',
+                  height: 24,
+                  width: 24,
                 ),
-              );
-            }
-          },
-        ),
+              ),
+            );
+          }
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BlocBuilder<NavigationBloc, NavigationState>(
+        builder: (context, state) {
+          if (state is NavigationCart || state is NavigationProfile) {
+            return const SizedBox.shrink();
+          } else {
+            return BottomAppBar(
+              color: const Color(0xFFF9F9F9),
+              shape: const CircularNotchedRectangle(),
+              notchMargin: 8.0,
+              child: SizedBox(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    _buildNavItem('assets/images/svg/bottom_nav_home.svg',
+                        'Home', 0, state, context),
+                    _buildNavItem('assets/images/svg/bottom_nav_favourite.svg',
+                        'Favourite', 1, state, context),
+                    const SizedBox(width: 40), 
+                    _buildNavItem('assets/images/svg/bottom_nav_cart.svg',
+                        'Shopping', 2, state, context),
+                    _buildNavItem('assets/images/svg/bottom_nav_profile.svg',
+                        'Profile', 3, state, context),
+                  ],
+                ),
+              ),
+            );
+          }
+        },
       ),
     );
   }

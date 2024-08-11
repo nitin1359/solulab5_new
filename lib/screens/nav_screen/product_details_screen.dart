@@ -40,15 +40,14 @@ class ProductDetailsScreen extends StatelessWidget {
                         children: [
                           const SizedBox(height: 8.0),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 customBackButton(
                                   onPressed: () {
-                                    context
-                                        .read<NavigationBloc>()
-                                        .add(NavigationEvent.home);
+                                    Navigator.pop(context);
                                   },
                                 ),
                                 IconButton(
@@ -78,7 +77,8 @@ class ProductDetailsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 24.0),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
                             child: Center(
                               child: Stack(
                                 alignment: Alignment.bottomCenter,
@@ -102,11 +102,13 @@ class ProductDetailsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 24.0),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
                             child: SizedBox(
                               height: 64.0,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   SizedBox(
@@ -130,7 +132,8 @@ class ProductDetailsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 24.0),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -183,7 +186,8 @@ class ProductDetailsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 21.0),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
                             child: customSwitzerText(
                               text: 'Description',
                               fontSize: 20,
@@ -193,7 +197,8 @@ class ProductDetailsScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8.0),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 24.0),
                             child: SizedBox(
                               height: 66.0,
                               child: customSwitzerText(
@@ -235,8 +240,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                               UpdateCartQuantity(
                                                 product: currentProduct,
                                                 quantity:
-                                                    currentProduct.quantity -
-                                                        1,
+                                                    currentProduct.quantity - 1,
                                               ),
                                             );
                                       }
@@ -281,8 +285,8 @@ class ProductDetailsScreen extends StatelessWidget {
                             child: BlocBuilder<ProductBloc, ProductState>(
                               builder: (context, state) {
                                 if (state is ProductLoaded) {
-                                  final isInCart = state.products.any((p) =>
-                                      p.id == product.id && p.isInCart);
+                                  final isInCart = state.products.any(
+                                      (p) => p.id == product.id && p.isInCart);
 
                                   return customButtonwithImage(
                                       text: isInCart
@@ -294,8 +298,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                                   product: currentProduct),
                                             );
                                       },
-                                      imagePath:
-                                          'assets/images/svg/cart1.svg');
+                                      imagePath: 'assets/images/svg/cart1.svg');
                                 }
                                 return const SizedBox.shrink();
                               },
